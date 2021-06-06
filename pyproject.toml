@@ -6,6 +6,7 @@ authors = ["yuji nunome <yuji.dis@gail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+"discord.py" = {git = "https://github.com/Rapptz/discord.py.git"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
