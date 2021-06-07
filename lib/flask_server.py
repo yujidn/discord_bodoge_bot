@@ -14,17 +14,17 @@ CORS(app)
 CERTFILE = './localhost.pem'
 
 @app.route('/')
-def hello():
+def __hello():
     return 'Hello World!'
 
 
 @app.route('/ping')
-def ping():
+def __ping():
     return 'pong'
 
 
 @app.route('/image', methods=['POST'])
-def get_image():
+def __get_image():
     try:
         print(request)
         # print(request.form)
@@ -38,8 +38,8 @@ def get_image():
     cv2.imwrite("test.jpg", image)
 
 
-if __name__ == '__main__':
-
+def flask_run(port=4433):
+    print(f"flask_run port:{port}")
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     context.load_cert_chain(CERTFILE)
-    app.run(ssl_context=context, host='0.0.0.0', port=4433)
+    app.run(ssl_context=context, host='0.0.0.0', port=port)
