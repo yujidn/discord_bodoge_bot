@@ -1,0 +1,7 @@
+.vscode/
+*.pem
+*.csr
+*.key
+*.jpg
+lib/__pycache__/
+.env.json
