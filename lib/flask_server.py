@@ -13,6 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 CERTFILE = "./localhost.pem"
+GET_IMAGE_NAME = "capture.jpg"
 
 
 @app.route("/")
@@ -35,7 +36,7 @@ def __get_image():
     buf_image = base64.b64decode(b64_image)
     np_image = np.frombuffer(buf_image, np.uint8)
     image = cv2.imdecode(np_image, cv2.IMREAD_COLOR)
-    cv2.imwrite("test.jpg", image)
+    cv2.imwrite(GET_IMAGE_NAME, image)
     return "ok"
 
 

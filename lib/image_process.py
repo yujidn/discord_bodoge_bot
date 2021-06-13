@@ -20,7 +20,7 @@ def image_divide(image, width_divide=3, height_divide=2):
             player_view.append(image[dh * hi : dh * (hi + 1), dw * wi : dw * (wi + 1)])
 
     for i, pv in enumerate(player_view):
-        cv2.imwrite(f"pv_{i}.jpg", pv)
+        cv2.imwrite(f"pv_{i+1}.jpg", pv)
 
 
 def calibration(image):
