@@ -14,6 +14,8 @@ matplotlib = "*"
 opencv-python = "^4.5.2"
 Flask = "^2.0.1"
 Flask-Cors = "^3.0.10"
+black = "^21.6b0"
+pre-commit = "^2.13.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -21,3 +23,20 @@ pytest = "^5.2"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 90
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | notebook
+)/
+'''
