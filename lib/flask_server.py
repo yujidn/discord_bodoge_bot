@@ -12,34 +12,35 @@ import numpy as np
 app = Flask(__name__)
 CORS(app)
 
-CERTFILE = './localhost.pem'
+CERTFILE = "./localhost.pem"
 
-@app.route('/')
+
+@app.route("/")
 def __hello():
-    return 'Hello World!'
+    return "Hello World!"
 
 
-@app.route('/ping')
+@app.route("/ping")
 def __ping():
-    return 'pong'
+    return "pong"
 
 
-@app.route('/image', methods=['POST'])
+@app.route("/image", methods=["POST"])
 def __get_image():
     try:
-        b64_image = request.form['image']
+        b64_image = request.form["image"]
     except KeyError:
-        return 'image not found'
+        return "image not found"
 
     buf_image = base64.b64decode(b64_image)
     np_image = np.frombuffer(buf_image, np.uint8)
     image = cv2.imdecode(np_image, cv2.IMREAD_COLOR)
     cv2.imwrite("test.jpg", image)
-    return 'ok'
+    return "ok"
 
 
 def flask_run(port=4433):
     print(f"flask_run port:{port}")
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     context.load_cert_chain(CERTFILE)
-    app.run(ssl_context=context, host='0.0.0.0', port=port)
+    app.run(ssl_context=context, host="0.0.0.0", port=port)

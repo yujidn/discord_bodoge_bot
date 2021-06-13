@@ -1,13 +1,13 @@
 import random
 
-def dice(num_d_num: str) -> [int, list, dict]:
 
+def dice(num_d_num: str) -> [int, list, dict]:
     def __dice(num, size):
         s = 0
         r = []
         d = {}
         for i in range(size):
-            d[str(i+1)] = 0
+            d[str(i + 1)] = 0
 
         for i in range(num):
             v = random.randint(1, size)
@@ -20,13 +20,13 @@ def dice(num_d_num: str) -> [int, list, dict]:
     dice_history = []
     dice_histgram = {}
     # dice
-    if 'd' in num_d_num:
-        sp = num_d_num.split('d')
+    if "d" in num_d_num:
+        sp = num_d_num.split("d")
         num = int(sp[0])
         size = int(sp[1])
         dice_sum, dice_history, dice_histgram = __dice(num, size)
-    elif 'D' in num_d_num:
-        sp = num_d_num.split('D')
+    elif "D" in num_d_num:
+        sp = num_d_num.split("D")
         num = int(sp[0])
         size = int(sp[1])
         dice_sum, dice_history, dice_histgram = __dice(num, size)

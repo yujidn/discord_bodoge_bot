@@ -3,6 +3,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 CERTFILE = "./localhost.pem"
 
+
 def image_server_run(port=443):
     print(f"image_server_run port:{port}")
     Handler = SimpleHTTPRequestHandler

@@ -10,19 +10,19 @@ import threading
 
 
 bot_commands = {
-    'help': ['/help', '/h'],
-    'image_update': ['/image_update', '/iu'],
-    'regist': [],
-    'onymous_chat': [],
-    'anomymous_chat': [],
-    'exit': ['/exit']
+    "help": ["/help", "/h"],
+    "image_update": ["/image_update", "/iu"],
+    "regist": [],
+    "onymous_chat": [],
+    "anomymous_chat": [],
+    "exit": ["/exit"],
 }
 
 # discord client
 client = discord.Client()
 
 # ダイス用
-dice_pattern = re.compile('^\d+d\d+$', re.IGNORECASE)
+dice_pattern = re.compile("^\d+d\d+$", re.IGNORECASE)
 
 # 画像受信サーバー
 flask_thread = threading.Thread(target=flask_run)
@@ -32,11 +32,13 @@ image_server_thread.setDaemon(True)
 flask_thread.start()
 image_server_thread.start()
 
+
 # 起動時に動作する処理
 @client.event
 async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
-    print('ログインしました')
+    print("ログインしました")
+
 
 # メッセージ受信時に動作する処理
 # botへのDMもこのイベントが活性する
@@ -49,14 +51,16 @@ async def on_message(message: discord.message.Message):
         return
 
     # channelに投稿される
-    await message.channel.send(f'you said {message.content}. channel')
+    await message.channel.send(f"you said {message.content}. channel")
     # DMになる
     # await message.author.send(f'you said {message.content}. author')
 
     # dice
     if dice_pattern.match(message.content) is not None:
         dice_sum, dice_history, dice_histgram = dice(message.content)
-        await message.channel.send(f'sum:{dice_sum} \nhistory:{dice_history}\nhistgram:{dice_histgram}')
+        await message.channel.send(
+            f"sum:{dice_sum} \nhistory:{dice_history}\nhistgram:{dice_histgram}"
+        )
         return
 
     if message.content in bot_commands["image_update"]:
@@ -66,7 +70,7 @@ async def on_message(message: discord.message.Message):
         await message.channel.send(file=df)
 
     if message.content in bot_commands["exit"]:
-        await message.channel.send(f'good bye')
+        await message.channel.send("good bye")
         sys.exit()
 
     # if message.content == '/regist':
@@ -75,8 +79,7 @@ async def on_message(message: discord.message.Message):
 
 
 # 接続に必要なオブジェクトを生成
-with open('.env.json') as f:
+with open(".env.json") as f:
     bot_key = json.load(f)
 
-client.run(bot_key['TOKEN'])
-
+client.run(bot_key["TOKEN"])
