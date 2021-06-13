@@ -3,17 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Camera Test</title>
+  <style>
+    canvas, video{
+      visibility: collapse;
+    }
+    button{
+      width: 300;
+      height: 150;
+    }
+
+  </style>
 </head>
 <body>
 
 <h1>HTML5カメラ</h1>
 
-<video id="camera" autoplay></video>
-<canvas id="picture"></canvas>
-
 <form>
   <button type="button" id="shutter">送信</button>
 </form>
+
+<video id="camera" autoplay></video>
+<canvas id="picture"></canvas>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
@@ -29,7 +39,8 @@ window.onload = () => {
       audio: false,
       video: {
         width: {min: 1920, max: 4032},
-        height: {min: 1080, max: 2160},
+        height: {min: 1440, max: 3024},
+        frameRate: 1,
         facingMode: 'environment'
         // facingMode: "user"   // フロントカメラを利用する場合
       }
@@ -45,7 +56,7 @@ window.onload = () => {
     console.log(err.name + ": " + err.message);
   });
 
-  document.querySelector("#shutter").addEventListener("click", () => {
+  const callImageAPI = () => {
     var ctx = canvas.getContext('2d');
     var w = video.offsetWidth;	// videoの横幅取得.
     var h = video.offsetHeight;	// videoの縦幅取得.
@@ -72,9 +83,12 @@ window.onload = () => {
       error: function (XMLHttpRequest, textStatus, errorThrown) {
         console.log("error");
       }
-	})
+    })
+  };
 
-  });
+  document.querySelector("#shutter").addEventListener("click", callImageAPI);
+
+  setInterval(callImageAPI, 1000);
 
 };
 </script>
