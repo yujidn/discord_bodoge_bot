@@ -1,3 +1,4 @@
+import sys
 import discord
 import json
 import re
@@ -14,6 +15,7 @@ bot_commands = {
     'regist': [],
     'onymous_chat': [],
     'anomymous_chat': [],
+    'exit': ['/exit']
 }
 
 # discord client
@@ -25,6 +27,8 @@ dice_pattern = re.compile('^\d+d\d+$', re.IGNORECASE)
 # 画像受信サーバー
 flask_thread = threading.Thread(target=flask_run)
 image_server_thread = threading.Thread(target=image_server_run)
+flask_thread.setDaemon(True)
+image_server_thread.setDaemon(True)
 flask_thread.start()
 image_server_thread.start()
 
@@ -61,6 +65,9 @@ async def on_message(message: discord.message.Message):
         df = discord.File(filepath, filename=filename)
         await message.channel.send(file=df)
 
+    if message.content in bot_commands["exit"]:
+        await message.channel.send(f'good bye')
+        sys.exit()
 
     # if message.content == '/regist':
     #      await message.channel.send('call regist @channel')
