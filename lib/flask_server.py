@@ -8,6 +8,7 @@ import base64
 import cv2
 import numpy as np
 
+
 app = Flask(__name__)
 CORS(app)
 
@@ -26,16 +27,15 @@ def __ping():
 @app.route('/image', methods=['POST'])
 def __get_image():
     try:
-        print(request)
-        # print(request.form)
         b64_image = request.form['image']
     except KeyError:
-        raise InvalidArgumentsError('image not found')
+        return 'image not found'
 
     buf_image = base64.b64decode(b64_image)
     np_image = np.frombuffer(buf_image, np.uint8)
     image = cv2.imdecode(np_image, cv2.IMREAD_COLOR)
     cv2.imwrite("test.jpg", image)
+    return 'ok'
 
 
 def flask_run(port=4433):
