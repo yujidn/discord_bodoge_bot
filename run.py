@@ -17,15 +17,15 @@ FIELD_COL = 3
 FIELD_ROW = 2
 
 bot_commands = {
-    "help": ["/help", "/h"],
-    "init": ["/init"],
-    "image_update": ["/image_update", "/iu"],
-    "regist": ["/regist", "/r"],
-    # "onymous_chat": ["/onymous", "/o"],
-    # "anomymous_chat": ["/anonymous", "/a"],
-    "open_onymous_chat": ["/onymous_chat", "/oc"],
-    "open_anonymous_chat": ["/anonymous_chat", "/ac"],
-    "shutdown": ["/shutdown"],
+    "help": ["!help", "!h"],
+    "init": ["!init"],
+    "image_update": ["!image_update", "!iu"],
+    "regist": ["!regist", "!r"],
+    # "onymous_chat": ["!onymous", "!o"],
+    # "anomymous_chat": ["!anonymous", "!a"],
+    "open_onymous_chat": ["!onymous_chat", "!oc"],
+    "open_anonymous_chat": ["!anonymous_chat", "!ac"],
+    "shutdown": ["!shutdown"],
 }
 
 # discord client
